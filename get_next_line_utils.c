@@ -6,11 +6,31 @@
 /*   By: vlopes < vlopes@student.42.rio>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 10:45:05 by vlopes            #+#    #+#             */
-/*   Updated: 2022/06/09 12:25:42 by vlopes           ###   ########.fr       */
+/*   Updated: 2022/06/15 18:38:30 by vlopes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*ft_strchr(const char *s, int c)
+{
+	char	*p;
+	int		i;
+	char	o;
+
+	p = (char *)s;
+	i = 0;
+	o = (char)c;
+	while (p[i] != 0)
+	{
+		if (p[i] != 0)
+			return (p + i);
+		i++;
+	}
+	if (p[i] == 0 && o == 0)
+		return (p + i);
+	return (0);
+}	
 
 size_t	ft_strlen(const char *s)
 {
