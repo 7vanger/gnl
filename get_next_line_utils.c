@@ -6,7 +6,7 @@
 /*   By: vlopes < vlopes@student.42.rio>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 10:45:05 by vlopes            #+#    #+#             */
-/*   Updated: 2022/06/15 18:38:30 by vlopes           ###   ########.fr       */
+/*   Updated: 2022/06/19 13:32:18 by vlopes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strchr(const char *s, int c)
 	o = (char)c;
 	while (p[i] != 0)
 	{
-		if (p[i] != 0)
+		if (p[i] == o)
 			return (p + i);
 		i++;
 	}
