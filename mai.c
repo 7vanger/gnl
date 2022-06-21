@@ -6,7 +6,7 @@ int main()
 {
 	int fd1 = open("../textao.txt", O_RDONLY);
 	int n = 0;
-	while (n < 6)	
+	while (n < 20)	
 	{
 		printf("%s", get_next_line(fd1));
 		n++;

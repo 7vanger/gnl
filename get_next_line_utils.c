@@ -6,33 +6,34 @@
 /*   By: vlopes < vlopes@student.42.rio>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 10:45:05 by vlopes            #+#    #+#             */
-/*   Updated: 2022/06/19 13:32:18 by vlopes           ###   ########.fr       */
+/*   Updated: 2022/06/21 15:45:57 by vlopes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
-	char	*p;
-	int		i;
-	char	o;
+	int	i;
 
-	p = (char *)s;
 	i = 0;
-	o = (char)c;
-	while (p[i] != 0)
+	if (!s)
 	{
-		if (p[i] == o)
-			return (p + i);
+		free(s);
+		return (0);
+	}
+	while (s[i] != 0)
+	{
+		if (s[i] == (unsigned char)c)
+			return (s + i);
 		i++;
 	}
-	if (p[i] == 0 && o == 0)
-		return (p + i);
+	if ((unsigned char)c == 0)
+		return (s + i);
 	return (0);
-}	
+}
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(char *s)
 {
 	int	i;
 
@@ -45,70 +46,44 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
-{
-	size_t	n;
-	size_t	u;
-	char	*ab;
-
-	ab = (char *)src;
-	n = 0;
-	u = ft_strlen(ab);
-	if (!dst)
-		return (0);
-	if (!dstsize)
-		return (u);
-	while (ab[n] && n < dstsize - 1)
-	{
-		dst[n] = ab[n];
-		n++;
-	}
-	dst[n] = 0;
-	return (u);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	int		i;
-	char	*name;
+char	*ft_to_name(char *name, char *s1, char *s2)
+{	
+	int	j;
+	int	i;
 
 	i = 0;
-	if (s1 == NULL)
-		return (0);
-	name = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!name)
-		return (0);
-	while (*s1 != 0)
+	j = 0;
+	while (s1[j])
 	{
-		name[i] = *s1;
+		name[i] = s1[j];
 		i++;
-		s1++;
+		j++;
 	}
-	while (*s2 != 0)
+	j = 0;
+	while (s2[j])
 	{
-		name[i] = *s2;
+		name[i] = s2[j];
 		i++;
-		s2++;
+		j++;
 	}
 	name[i] = 0;
 	return (name);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_strjoin(char *s1, char *s2)
 {
+	int		i;
+	int		j;
 	char	*name;
-	size_t	i;
 
 	i = 0;
-	if (!s)
+	j = 0;
+	if (!s1)
 		return (0);
-	if (ft_strlen(s) < start)
-		len = 0;
-	if (ft_strlen(s + start) < len)
-		len = ft_strlen(s + start);
-	name = malloc((len + 1) * sizeof(char));
+	name = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!name)
 		return (0);
-	ft_strlcpy (name, s + start, len + 1);
+	name = ft_to_name(name, s1, s2);
+	free(s1);
 	return (name);
 }
